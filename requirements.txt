@@ -1,0 +1,9 @@
+youtube-search-python==1.6.6
+pytesseract
+opencv-python
+google-api-python-client
+pytesseract
+Pillow
+pillow
+opencv-python
+exifread
