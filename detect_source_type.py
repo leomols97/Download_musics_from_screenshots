@@ -18,17 +18,7 @@ from PIL import Image
 import exifread
 # Import du module exifread pour lire les métadonnées EXIF des images (non utilisé dans ce module)
 
-# Résolutions typiques d'écrans d'appareils Apple
-IPHONE_SCREENSHOTS = [
-    (1170, 2532), (1284, 2778), (1125, 2436), (1242, 2688),
-    (828, 1792), (750, 1334)
-]
-# Liste de tuples contenant les résolutions d'écran d'iPhone
-
-IPAD_SCREENSHOTS = [
-    (2048, 2732), (1668, 2388), (1640, 2360), (1536, 2048)
-]
-# Liste de tuples contenant les résolutions d'écran d'iPad
+# Les listes de résolutions d'écran d'iPhone et d'iPad ont été supprimées car la détection des appareils utilise désormais exclusivement les constantes et fonctions du module device_image_types.py.
 
 def is_close(a, b, tol=0.03):
     """
@@ -45,43 +35,7 @@ def is_close(a, b, tol=0.03):
     return abs(a - b) / max(a, b) < tol
 # Fonction pour vérifier si deux valeurs sont proches l'une de l'autre
 
-def is_screenshot_size(width, height, known_sizes):
-    """
-    Vérifie si une taille d'image correspond à une taille d'écran connue.
-
-    Args:
-        width (int): La largeur de l'image.
-        height (int): La hauteur de l'image.
-        known_sizes (list): La liste des tailles d'écran connues.
-
-    Returns:
-        bool: True si la taille d'image correspond à une taille d'écran connue, False sinon.
-    """
-    for ref_w, ref_h in known_sizes:
-        if (is_close(width, ref_w) and is_close(height, ref_h)) or (is_close(width, ref_h) and is_close(height, ref_w)):
-            return True
-    return False
-# Fonction pour vérifier si une taille d'image correspond à une taille d'écran connue
-
-def guess_by_size(width, height):
-    """
-    Devine le type de source d'une image en fonction de sa taille.
-
-    Args:
-        width (int): La largeur de l'image.
-        height (int): La hauteur de l'image.
-
-    Returns:
-        str: Le type de source de l'image (par exemple : "Screenshot iPhone", "Screenshot iPad", etc.).
-    """
-    wh = (width, height)
-    whr = (height, width)
-    if wh in IPHONE_SCREENSHOTS or whr in IPHONE_SCREENSHOTS:
-        return "Screenshot iPhone"
-    if wh in IPAD_SCREENSHOTS or whr in IPAD_SCREENSHOTS:
-        return "Screenshot iPad"
-    return None
-# Fonction pour deviner le type de source d'une image en fonction de sa taille
+# Les fonctions is_screenshot_size et guess_by_size ont été supprimées car la détection d'appareil et de source s'appuie désormais sur device_image_types.py et ses utilitaires plus complets.
 
 from device_image_types import DEVICE_IMAGE_TYPES, IPHONE_MODELS, IPAD_MODELS, ORIENTATIONS, SOURCES, DEVICE_RESOLUTIONS, is_model_resolution, DEVICE_RESOLUTION_TOLERANCE
 # Import des constantes et fonctions du module device_image_types
